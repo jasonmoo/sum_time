@@ -27,6 +27,7 @@ func main() {
 
 	cr := csv.NewReader(os.Stdin)
 	sum := time.Duration(0)
+	zero, _ := time.Parse("15:04:05", "00:00:00")
 
 	for {
 		line, err := cr.Read()
@@ -45,9 +46,7 @@ func main() {
 			fmt.Printf("Unable to parse time: %s\n", line[*f-1])
 			continue
 		}
-		sum += time.Duration(t.Hour()) * time.Hour
-		sum += time.Duration(t.Minute()) * time.Minute
-		sum += time.Duration(t.Second()) * time.Second
+		sum += t.Sub(zero)
 	}
 
 	fmt.Printf("Total time: %s\n", sum)
