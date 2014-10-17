@@ -25,7 +25,10 @@ func main() {
 		os.Exit(1)
 	}
 
-	for cr, sum := csv.NewReader(os.Stdin), time.Duration(0); ; {
+	cr := csv.NewReader(os.Stdin)
+	sum := time.Duration(0)
+
+	for {
 		line, err := cr.Read()
 		if err != nil {
 			if err == io.EOF {
